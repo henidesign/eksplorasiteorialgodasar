@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritma & Pseudocode - SIJA X</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Fira Code (for code blocks) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        sija: {
+                            dark: '#0f172a',    // slate-900
+                            card: '#1e293b',    // slate-800
+                            primary: '#3b82f6', // blue-500
+                            accent: '#10b981',  // emerald-500
+                            text: '#f8fafc'     // slate-50
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles & Animations */
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .step-highlight {
+            background-color: rgba(59, 130, 246, 0.3) !important;
+            border-left: 4px solid #3b82f6 !important;
+            transition: all 0.3s ease;
+        }
+        .code-line {
+            padding: 4px 8px;
+            border-left: 4px solid transparent;
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+        /* Custom scrollbar for code blocks */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; 
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-sija-dark/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-network-wired text-sija-primary text-2xl"></i>
+                    <span class="font-bold text-xl tracking-tight">SIJA<span class="text-sija-primary">Code</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#tujuan" class="hover:text-sija-primary px-3 py-2 rounded-md text-sm font-medium transition">Tujuan</a>
+                        <a href="#materi" class="hover:text-sija-primary px-3 py-2 rounded-md text-sm font-medium transition">Materi</a>
+                        <a href="#simulasi" class="bg-sija-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg shadow-blue-500/30">Simulasi Interaktif</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-20 pb-16 overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-sija-primary rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-sija-accent rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="text-sija-primary font-semibold tracking-wider uppercase text-sm mb-4 block">Modul Pembelajaran Interaktif Kelas X</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 glow-text">
+                Logika Algoritma & <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Pseudocode</span>
+            </h1>
+            <p class="mt-4 text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
+                Pelajari fondasi utama dalam dunia pemrograman dan jaringan. Pahami cara otak komputer menyelesaikan masalah selangkah demi selangkah.
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="#materi" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white px-6 py-3 rounded-xl font-medium transition flex items-center gap-2">
+                    <i class="fa-solid fa-book-open"></i> Mulai Belajar
+                </a>
+                <a href="#simulasi" class="bg-sija-primary hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-medium transition shadow-lg shadow-blue-500/30 flex items-center gap-2">
+                    <i class="fa-solid fa-play"></i> Coba Simulasi
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-24">
+
+        <!-- Tujuan Pembelajaran Section -->
+        <section id="tujuan" class="scroll-mt-24">
+            <div class="bg-sija-card border border-slate-700 rounded-2xl p-8 shadow-xl">
+                <div class="flex items-center gap-4 mb-6 border-b border-slate-700 pb-4">
+                    <div class="p-3 bg-blue-500/20 rounded-lg text-blue-400">
+                        <i class="fa-solid fa-bullseye text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Target Belajar Kita Hari Ini</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-sija-primary mb-4"><i class="fa-solid fa-map-location-dot mr-2"></i>Tujuan Pembelajaran (TP)</h3>
+                        <ul class="space-y-3 text-slate-300">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check-circle text-emerald-400 mt-1"></i>
+                                <span>Memahami <strong>konsep dan fungsi</strong> algoritma secara logis dari contoh masalah nyata.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check-circle text-emerald-400 mt-1"></i>
+                                <span>Menganalisis langkah penyelesaian dengan struktur <strong>Sequential, Conditional, dan Looping</strong>.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check-circle text-emerald-400 mt-1"></i>
+                                <span>Mampu merancang solusi ke dalam bentuk <strong>Pseudocode</strong> yang terstruktur.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900/50 p-5 rounded-xl border border-slate-700/50">
+                        <h3 class="text-lg font-semibold text-emerald-400 mb-3"><i class="fa-solid fa-star mr-2"></i>Kriteria Ketercapaian (KKTP)</h3>
+                        <p class="text-sm text-slate-400 mb-4">Kamu dinyatakan berhasil dalam materi ini jika kamu mampu:</p>
+                        <ol class="list-decimal list-inside space-y-2 text-sm text-slate-300">
+                            <li>Menjelaskan apa itu algoritma dan memberi contoh penerapannya.</li>
+                            <li>Menyusun urutan langkah masalah dengan tepat sesuai jenis strukturnya (Runtunan, Percabangan, Perulangan).</li>
+                            <li>Menuliskan rancangan algoritma tersebut ke dalam tulisan Pseudocode yang rapi dan logis.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Materi Section -->
+        <section id="materi" class="scroll-mt-24 space-y-16">
+            
+            <!-- Apa itu Algoritma -->
+            <div>
+                <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                    <span class="text-sija-primary">01.</span> Apa itu Algoritma?
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4 text-slate-300 text-lg leading-relaxed">
+                        <p>
+                            <strong>Algoritma</strong> adalah urutan langkah-langkah logis untuk menyelesaikan suatu masalah secara sistematis dan teratur.
+                        </p>
+                        <p>
+                            Bayangkan komputer itu sangat pintar menghitung, tapi dia tidak tahu harus ngapain kalau tidak kita beri instruksi. Nah, instruksi urut itulah yang disebut Algoritma.
+                        </p>
+                        <div class="bg-sija-card border-l-4 border-emerald-500 p-4 rounded-r-xl shadow-lg mt-6">
+                            <h4 class="font-bold text-white mb-2"><i class="fa-solid fa-utensils mr-2"></i>Contoh di Kehidupan Nyata: Memasak Nasi Goreng</h4>
+                            <ol class="list-decimal list-inside text-sm space-y-1">
+                                <li>Mulai</li>
+                                <li>Nyalakan kompor dan letakkan wajan</li>
+                                <li>Tuang sedikit minyak goreng</li>
+                                <li>Masukkan bumbu dan telur, lalu tumis</li>
+                                <li>Masukkan nasi putih dan kecap</li>
+                                <li>Aduk rata hingga matang</li>
+                                <li>Sajikan di piring</li>
+                                <li>Selesai</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="bg-sija-card p-6 rounded-2xl border border-slate-700 relative overflow-hidden group hover:border-blue-500 transition">
+                        <div class="absolute -right-10 -top-10 opacity-10 group-hover:opacity-20 transition text-9xl text-blue-500">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Algoritma di Dunia Anak SIJA 💻</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 bg-slate-900 p-3 rounded-lg"><i class="fa-solid fa-server text-blue-400"></i> Cara Konfigurasi IP Address di Mikrotik</li>
+                            <li class="flex items-center gap-3 bg-slate-900 p-3 rounded-lg"><i class="fa-solid fa-plug text-blue-400"></i> Urutan Menyusun Kabel UTP (Straight/Cross)</li>
+                            <li class="flex items-center gap-3 bg-slate-900 p-3 rounded-lg"><i class="fa-solid fa-bug text-blue-400"></i> Langkah Troubleshooting Jaringan Internet Mati</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 Struktur Dasar -->
+            <div>
+                <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                    <span class="text-sija-primary">02.</span> 3 Struktur Dasar Algoritma
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Sequential -->
+                    <div class="bg-sija-card border border-slate-700 rounded-xl p-6 hover:translate-y-[-5px] transition shadow-lg">
+                        <div class="w-12 h-12 bg-blue-500/20 text-blue-400 flex items-center justify-center rounded-lg text-xl mb-4">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Sequential (Runtunan)</h3>
+                        <p class="text-slate-400 text-sm mb-4">Langkah dijalankan satu per satu dari atas ke bawah. Tidak ada yang dilewati.</p>
+                        <div class="bg-slate-900 p-3 rounded text-xs font-mono text-emerald-300">
+                            1. Buka browser<br>
+                            2. Ketik 'google.com'<br>
+                            3. Tekan Enter
+                        </div>
+                    </div>
+                    <!-- Conditional -->
+                    <div class="bg-sija-card border border-slate-700 rounded-xl p-6 hover:translate-y-[-5px] transition shadow-lg">
+                        <div class="w-12 h-12 bg-amber-500/20 text-amber-400 flex items-center justify-center rounded-lg text-xl mb-4">
+                            <i class="fa-solid fa-code-branch"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Conditional (Percabangan)</h3>
+                        <p class="text-slate-400 text-sm mb-4">Memiliki syarat. Jika syarat terpenuhi (True), lakukan A. Jika tidak (False), lakukan B.</p>
+                        <div class="bg-slate-900 p-3 rounded text-xs font-mono text-amber-300">
+                            JIKA wifi tersambung MAKA<br>
+                            &nbsp;&nbsp;Bisa buka web<br>
+                            JIKA TIDAK<br>
+                            &nbsp;&nbsp;Tampil Dinosaurus Offline
+                        </div>
+                    </div>
+                    <!-- Looping -->
+                    <div class="bg-sija-card border border-slate-700 rounded-xl p-6 hover:translate-y-[-5px] transition shadow-lg">
+                        <div class="w-12 h-12 bg-purple-500/20 text-purple-400 flex items-center justify-center rounded-lg text-xl mb-4">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Looping (Perulangan)</h3>
+                        <p class="text-slate-400 text-sm mb-4">Menjalankan langkah yang sama berkali-kali sampai batas tertentu tercapai.</p>
+                        <div class="bg-slate-900 p-3 rounded text-xs font-mono text-purple-300">
+                            ULANGI 4 kali:<br>
+                            &nbsp;&nbsp;Kirim paket Ping ke router<br>
+                            &nbsp;&nbsp;Tunggu balasan
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apa itu Pseudocode -->
+            <div>
+                <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                    <span class="text-sija-primary">03.</span> Apa itu Pseudocode?
+                </h2>
+                <div class="bg-sija-card border border-slate-700 rounded-2xl p-8 relative">
+                    <p class="text-slate-300 text-lg mb-6 max-w-4xl">
+                        <strong>Pseudocode (Kode Semu)</strong> adalah cara penulisan algoritma yang menyerupai bahasa pemrograman, namun menggunakan bahasa manusia (Inggris/Indonesia) sehingga mudah dibaca. Ini adalah jembatan sebelum kita benar-benar menulis kode dalam bahasa Python, C++, atau PHP.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-emerald-400 mb-3"><i class="fa-solid fa-spell-check mr-2"></i>Kata Kunci Umum Pseudocode</h4>
+                            <table class="w-full text-sm text-left">
+                                <thead>
+                                    <tr class="bg-slate-900 text-slate-300">
+                                        <th class="px-4 py-2 rounded-tl-lg">Kata Kunci</th>
+                                        <th class="px-4 py-2 rounded-tr-lg">Fungsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-slate-400">
+                                    <tr class="border-b border-slate-700/50">
+                                        <td class="px-4 py-2 font-mono text-blue-400">START / END</td>
+                                        <td class="px-4 py-2">Memulai dan mengakhiri program</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-700/50">
+                                        <td class="px-4 py-2 font-mono text-amber-400">READ / INPUT</td>
+                                        <td class="px-4 py-2">Menerima data masukan dari user</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-700/50">
+                                        <td class="px-4 py-2 font-mono text-purple-400">PRINT / WRITE</td>
+                                        <td class="px-4 py-2">Menampilkan hasil ke layar</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-700/50">
+                                        <td class="px-4 py-2 font-mono text-pink-400">IF ... THEN ... ELSE</td>
+                                        <td class="px-4 py-2">Struktur kondisi / percabangan</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 font-mono text-emerald-400">FOR / WHILE</td>
+                                        <td class="px-4 py-2">Struktur perulangan (Looping)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="bg-slate-900 p-6 rounded-xl border border-slate-700">
+                            <h4 class="font-semibold text-white mb-3">Contoh Pseudocode Menghitung Luas</h4>
+                            <pre class="font-mono text-sm text-slate-300 whitespace-pre-wrap"><code><span class="text-blue-400">START</span>
+    <span class="text-amber-400">INPUT</span> panjang
+    <span class="text-amber-400">INPUT</span> lebar
+    
+    luas = panjang * lebar
+    
+    <span class="text-purple-400">PRINT</span> luas
+<span class="text-blue-400">END</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lab Simulasi Interaktif -->
+        <section id="simulasi" class="scroll-mt-24 pt-10 border-t border-slate-800">
+            <div class="text-center mb-10">
+                <span class="bg-blue-500/10 text-blue-400 text-sm font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Laboratorium Praktik</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Lab <span class="text-sija-primary">Menyusun Pseudocode</span></h2>
+                <p class="text-slate-400 max-w-3xl mx-auto">
+                    Kali ini kamu yang menjadi "programmer". Baca kasus, pilih kata kunci pseudocode pada setiap baris,
+                    lalu tuliskan sendiri data atau instruksinya. Susun sampai menjadi algoritma yang logis.
+                </p>
+            </div>
+
+            <!-- Case Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button onclick="changeSim('luas')" id="btn-sim-luas" class="sim-btn active bg-sija-primary text-white px-5 py-2.5 rounded-lg font-medium transition shadow-lg flex items-center gap-2">
+                    <i class="fa-solid fa-square-full"></i> Luas Persegi
+                </button>
+                <button onclick="changeSim('lulus')" id="btn-sim-lulus" class="sim-btn bg-slate-800 hover:bg-slate-700 text-slate-300 px-5 py-2.5 rounded-lg font-medium transition border border-slate-700 flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap"></i> Cek Kelulusan
+                </button>
+                <button onclick="changeSim('ping')" id="btn-sim-ping" class="sim-btn bg-slate-800 hover:bg-slate-700 text-slate-300 px-5 py-2.5 rounded-lg font-medium transition border border-slate-700 flex items-center gap-2">
+                    <i class="fa-solid fa-network-wired"></i> Ping Jaringan
+                </button>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-6 items-start">
+
+                <!-- Case & Instructions -->
+                <div class="lg:col-span-4 flex flex-col gap-6">
+                    <div class="bg-sija-card border border-slate-700 rounded-xl p-6 shadow-xl">
+                        <div class="flex items-center gap-2 mb-4">
+                            <i class="fa-solid fa-file-lines text-blue-400"></i>
+                            <h3 class="text-lg font-bold">Kasus</h3>
+                        </div>
+                        <h4 id="case-title" class="text-xl font-bold text-white mb-3"></h4>
+                        <p id="case-description" class="text-slate-300 text-sm leading-relaxed"></p>
+                        <div class="mt-5 bg-slate-900 rounded-lg p-4 border border-slate-700">
+                            <p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-2">Data yang digunakan</p>
+                            <p id="case-data" class="font-mono text-emerald-300 text-sm"></p>
+                        </div>
+                    </div>
+
+                    <div class="bg-sija-card border border-slate-700 rounded-xl p-6 shadow-xl">
+                        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-amber-400"></i> Petunjuk
+                        </h3>
+                        <ol class="list-decimal list-inside space-y-2 text-sm text-slate-300">
+                            <li>Pilih <strong>kata kunci</strong> pada setiap baris.</li>
+                            <li>Tuliskan <strong>data/instruksi</strong> sendiri pada kolom sebelahnya.</li>
+                            <li>Tambahkan atau hapus baris jika diperlukan.</li>
+                            <li>Susun hingga menjadi pseudocode yang logis.</li>
+                            <li>Klik <strong>Periksa Pseudocode</strong> untuk mendapatkan umpan balik.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Pseudocode Builder -->
+                <div class="lg:col-span-8 bg-sija-card border border-slate-700 rounded-xl shadow-xl overflow-hidden">
+                    <div class="bg-slate-800 px-5 py-4 border-b border-slate-700 flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                            <h3 class="font-bold flex items-center gap-2">
+                                <i class="fa-solid fa-code text-purple-400"></i> Susun Pseudocode
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">Pilih <span class="font-mono text-amber-300">INPUT</span>, lalu masukkan data yang sesuai dengan kasus.</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="addPseudoRow()" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 rounded-lg text-sm font-medium transition">
+                                <i class="fa-solid fa-plus mr-1"></i> Tambah Baris
+                            </button>
+                            <button type="button" onclick="resetBuilder()" class="bg-slate-700 hover:bg-slate-600 text-slate-300 px-3 py-2 rounded-lg text-sm font-medium transition">
+                                <i class="fa-solid fa-rotate-left mr-1"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 md:p-6">
+                        <div id="pseudo-builder" class="space-y-2"></div>
+
+                        <div class="mt-5 flex flex-wrap gap-3">
+                            <button type="button" onclick="checkPseudocode()" class="flex-1 min-w-[220px] bg-emerald-600 hover:bg-emerald-500 text-white py-3 px-4 rounded-lg font-bold transition shadow-lg shadow-emerald-500/20">
+                                <i class="fa-solid fa-circle-check mr-2"></i> Periksa Pseudocode
+                            </button>
+                        </div>
+
+                        <div id="feedback-box" class="hidden mt-5 rounded-xl border p-4" aria-live="polite"></div>
+
+                        <div class="mt-6 bg-slate-950 border border-slate-700 rounded-xl overflow-hidden">
+                            <div class="bg-slate-800 px-4 py-2 border-b border-slate-700 text-xs text-slate-400 font-mono">
+                                <i class="fa-solid fa-terminal mr-1"></i> Preview Pseudocode Kamu
+                            </div>
+                            <pre id="pseudo-preview" class="p-4 font-mono text-sm text-slate-300 whitespace-pre-wrap min-h-[150px]"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-800 py-8 mt-20">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
+            <p>Dibuat untuk Pembelajaran Dasar-dasar Kejuruan SIJA Kelas X.</p>
+            <p class="mt-2">Materi pembelajaran dasar algoritma dan pseudocode.</p>
+            <div class="mt-4 flex justify-center gap-4 text-lg text-slate-600">
+                <i class="fa-brands fa-html5 hover:text-orange-500 transition cursor-help" title="HTML5"></i>
+                <i class="fa-brands fa-css3-alt hover:text-blue-500 transition cursor-help" title="Tailwind CSS"></i>
+                <i class="fa-brands fa-js hover:text-yellow-400 transition cursor-help" title="JavaScript"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const simulations = {
+            luas: {
+                title: "Menghitung Luas Persegi Panjang",
+                description: "Sebuah program menerima panjang dan lebar, kemudian menghitung serta menampilkan luas persegi panjang.",
+                data: "Panjang = 80, Lebar = 40",
+                expected: [
+                    ["START", ""],
+                    ["INPUT", "80"],
+                    ["INPUT", "40"],
+                    ["PROCESS", "luas = panjang * lebar"],
+                    ["PRINT", "luas"],
+                    ["END", ""]
+                ],
+                hints: "Gunakan dua INPUT untuk menerima 80 dan 40. Setelah itu lakukan proses perkalian dan tampilkan hasilnya."
+            },
+            lulus: {
+                title: "Menentukan Status Kelulusan",
+                description: "Program menerima nilai ujian siswa. Jika nilai minimal 75, tampilkan KOMPETEN. Jika kurang dari 75, tampilkan BELUM KOMPETEN.",
+                data: "Nilai ujian = 80, batas kelulusan = 75",
+                expected: [
+                    ["START", ""],
+                    ["INPUT", "80"],
+                    ["IF", "nilai >= 75 THEN"],
+                    ["PROCESS", "status = KOMPETEN"],
+                    ["ELSE", ""],
+                    ["PROCESS", "status = BELUM KOMPETEN"],
+                    ["ENDIF", ""],
+                    ["PRINT", "status"],
+                    ["END", ""]
+                ],
+                hints: "Setelah INPUT nilai, gunakan IF untuk membandingkan nilai dengan 75. Siapkan dua kemungkinan hasil."
+            },
+            ping: {
+                title: "Mengirim Ping Berulang",
+                description: "Program menerima jumlah ping. Program kemudian mengirim ping sebanyak jumlah yang diminta dan menampilkan pesan setiap kali ping dilakukan.",
+                data: "Jumlah ping = 3",
+                expected: [
+                    ["START", ""],
+                    ["INPUT", "3"],
+                    ["SET", "i = 1"],
+                    ["WHILE", "i <= jumlahPing DO"],
+                    ["PRINT", "\"Reply from Server\""],
+                    ["SET", "i = i + 1"],
+                    ["ENDWHILE", ""],
+                    ["PRINT", "\"Ping Selesai\""],
+                    ["END", ""]
+                ],
+                hints: "Gunakan INPUT untuk 3, SET untuk penghitung, lalu WHILE agar proses ping berulang sampai jumlahnya tercapai."
+            }
+        };
+
+        const keywordOptions = [
+            ["START", "START"],
+            ["INPUT", "INPUT"],
+            ["PROCESS", "PROCESS"],
+            ["PRINT", "PRINT"],
+            ["SET", "SET"],
+            ["IF", "IF"],
+            ["ELSE", "ELSE"],
+            ["ENDIF", "ENDIF"],
+            ["WHILE", "WHILE"],
+            ["ENDWHILE", "ENDWHILE"],
+            ["END", "END"]
+        ];
+
+        let currentSim = "luas";
+
+        function makeKeywordSelect(value = "") {
+            const select = document.createElement("select");
+            select.className = "keyword-select w-full sm:w-36 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2.5 text-amber-300 font-mono text-sm focus:outline-none focus:border-sija-primary focus:ring-1 focus:ring-sija-primary";
+            select.setAttribute("aria-label", "Kata kunci pseudocode");
+
+            const blank = document.createElement("option");
+            blank.value = "";
+            blank.textContent = "Pilih kata kunci";
+            select.appendChild(blank);
+
+            keywordOptions.forEach(([key, label]) => {
+                const option = document.createElement("option");
+                option.value = key;
+                option.textContent = label;
+                if (key === value) option.selected = true;
+                select.appendChild(option);
+            });
+
+            select.addEventListener("change", updateBuilder);
+            return select;
+        }
+
+        function addPseudoRow(keyword = "", value = "") {
+            const builder = document.getElementById("pseudo-builder");
+            const row = document.createElement("div");
+            row.className = "pseudo-row flex flex-col sm:flex-row gap-2 items-stretch sm:items-center";
+            row.dataset.row = "true";
+
+            const number = document.createElement("span");
+            number.className = "row-number w-8 shrink-0 text-center text-slate-500 font-mono text-sm pt-2.5";
+            number.textContent = builder.children.length + 1 + ".";
+
+            const select = makeKeywordSelect(keyword);
+
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = value;
+            input.placeholder = "Masukkan data";
+            input.className = "pseudo-value flex-1 min-w-0 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white font-mono text-sm focus:outline-none focus:border-sija-primary focus:ring-1 focus:ring-sija-primary";
+            input.addEventListener("input", updateBuilder);
+
+            const remove = document.createElement("button");
+            remove.type = "button";
+            remove.title = "Hapus baris";
+            remove.setAttribute("aria-label", "Hapus baris");
+            remove.className = "remove-row w-full sm:w-10 min-h-[44px] bg-slate-800 hover:bg-red-900/50 border border-slate-700 text-slate-400 hover:text-red-300 rounded-lg transition";
+            remove.innerHTML = '<i class="fa-solid fa-trash"></i>';
+            remove.addEventListener("click", () => {
+                row.remove();
+                renumberRows();
+                updateBuilder();
+            });
+
+            row.append(number, select, input, remove);
+            builder.appendChild(row);
+            updateBuilder();
+        }
+
+        function renumberRows() {
+            document.querySelectorAll("#pseudo-builder .pseudo-row").forEach((row, index) => {
+                row.querySelector(".row-number").textContent = `${index + 1}.`;
+            });
+        }
+
+        function updateBuilder() {
+            document.querySelectorAll("#pseudo-builder .pseudo-row").forEach(row => {
+                const select = row.querySelector(".keyword-select");
+                const input = row.querySelector(".pseudo-value");
+                const key = select.value;
+
+                if (key === "START" || key === "END" || key === "ELSE" || key === "ENDIF" || key === "ENDWHILE") {
+                    input.placeholder = "Tidak perlu data";
+                    input.disabled = true;
+                    input.value = "";
+                    input.classList.add("opacity-50");
+                } else {
+                    input.disabled = false;
+                    input.classList.remove("opacity-50");
+                    input.placeholder = "Masukkan data";
+                }
+            });
+
+            updatePreview();
+        }
+
+        function getRows() {
+            return [...document.querySelectorAll("#pseudo-builder .pseudo-row")].map(row => ({
+                keyword: row.querySelector(".keyword-select").value,
+                value: row.querySelector(".pseudo-value").value.trim()
+            }));
+        }
+
+        function updatePreview() {
+            const rows = getRows();
+            const preview = rows.map(row => {
+                if (!row.keyword) return "";
+                return row.value ? `${row.keyword} ${row.value}` : row.keyword;
+            }).filter(Boolean).join("\n");
+
+            document.getElementById("pseudo-preview").textContent = preview || "// Pseudocode kamu akan muncul di sini...";
+        }
+
+        function changeSim(simId) {
+            currentSim = simId;
+            const data = simulations[simId];
+
+            document.querySelectorAll(".sim-btn").forEach(btn => {
+                btn.classList.remove("bg-sija-primary", "text-white", "shadow-lg");
+                btn.classList.add("bg-slate-800", "text-slate-300");
+            });
+
+            const activeBtn = document.getElementById(`btn-sim-${simId}`);
+            activeBtn.classList.remove("bg-slate-800", "text-slate-300");
+            activeBtn.classList.add("bg-sija-primary", "text-white", "shadow-lg");
+
+            document.getElementById("case-title").textContent = data.title;
+            document.getElementById("case-description").textContent = data.description;
+            document.getElementById("case-data").textContent = data.data;
+
+            resetBuilder();
+        }
+
+        function resetBuilder() {
+            const builder = document.getElementById("pseudo-builder");
+            builder.innerHTML = "";
+
+            // Kosongkan seluruh jawaban agar siswa menyusun pseudocode sendiri.
+            // Hanya beberapa baris kosong yang disediakan sebagai titik awal.
+            for (let i = 0; i < 6; i++) {
+                addPseudoRow("", "");
+            }
+
+            const feedback = document.getElementById("feedback-box");
+            feedback.className = "hidden mt-5 rounded-xl border p-4";
+            feedback.innerHTML = "";
+            updateBuilder();
+        }
+
+        function normalize(value) {
+            return value.toLowerCase()
+                .replace(/[“”]/g, '"')
+                .replace(/[‘’]/g, "'")
+                .replace(/\s+/g, " ")
+                .trim();
+        }
+
+        function checkPseudocode() {
+            const rows = getRows().filter(row => row.keyword || row.value);
+            const expected = simulations[currentSim].expected;
+            const feedback = document.getElementById("feedback-box");
+
+            if (rows.length === 0) {
+                feedback.className = "mt-5 rounded-xl border border-red-500/40 bg-red-500/10 p-4 text-red-300";
+                feedback.innerHTML = '<strong>Belum ada pseudocode.</strong><br>Mulai dengan memilih kata kunci pada baris pertama.';
+                return;
+            }
+
+            const keywordScore = rows.filter(r => r.keyword).length / Math.max(rows.length, expected.length);
+            let exactMatches = 0;
+
+            rows.forEach((row, i) => {
+                const target = expected[i];
+                if (!target) return;
+                if (row.keyword === target[0]) {
+                    exactMatches++;
+                    if (normalize(row.value) === normalize(target[1])) {
+                        exactMatches++;
+                    }
+                }
+            });
+
+            const structure = rows.map(r => r.keyword);
+            const hasStart = structure[0] === "START";
+            const hasEnd = structure[structure.length - 1] === "END";
+            const inputCount = structure.filter(k => k === "INPUT").length;
+
+            let score = Math.round(
+                (exactMatches / (expected.length * 2)) * 70 +
+                (keywordScore * 20) +
+                ((hasStart ? 5 : 0) + (hasEnd ? 5 : 0))
+            );
+            score = Math.max(0, Math.min(100, score));
+
+            const correctKeywords = rows.filter((row, i) => expected[i] && row.keyword === expected[i][0]).length;
+            const correctData = rows.filter((row, i) => expected[i] && normalize(row.value) === normalize(expected[i][1]) && expected[i][1] !== "").length;
+
+            let message = "";
+            if (score >= 90) {
+                message = `<strong>🎉 Sangat bagus! Skor ${score}/100.</strong><br>Pseudocode kamu sudah tersusun dengan sangat baik. Kamu sudah mulai berpikir seperti program yang harus membaca instruksi satu per satu.`;
+            } else if (score >= 70) {
+                message = `<strong>👍 Hampir beres! Skor ${score}/100.</strong><br>Strukturnya sudah cukup tepat. Coba cek kembali urutan kata kunci dan data pada beberapa baris.`;
+            } else {
+                message = `<strong>🧩 Masih perlu diperbaiki. Skor ${score}/100.</strong><br>Jangan buru-buru. Baca kembali kasus, tentukan INPUT, proses, kondisi/perulangan, dan OUTPUT yang dibutuhkan.`;
+            }
+
+            const detail = `
+                <div class="mt-3 text-sm text-slate-300 space-y-1">
+                    <div>• Kata kunci pada posisi yang tepat: <strong>${correctKeywords}/${expected.length}</strong></div>
+                    <div>• Data/instruksi yang cocok: <strong>${correctData}</strong></div>
+                    <div>• START di awal: <strong>${hasStart ? "✓" : "✗"}</strong> &nbsp; END di akhir: <strong>${hasEnd ? "✓" : "✗"}</strong></div>
+                    ${currentSim === "luas" && inputCount < 2 ? '<div class="text-amber-300">💡 Kasus ini membutuhkan dua INPUT: panjang dan lebar.</div>' : ""}
+                    <div class="mt-2 text-slate-400">Petunjuk: ${simulations[currentSim].hints}</div>
+                </div>
+            `;
+
+            feedback.className = `mt-5 rounded-xl border ${score >= 70 ? "border-emerald-500/40 bg-emerald-500/10" : "border-amber-500/40 bg-amber-500/10"} p-4 text-slate-200`;
+            feedback.innerHTML = message + detail;
+            feedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+
+        window.onload = () => {
+            changeSim("luas");
+        };
+    </script>
+</body>
+</html>
